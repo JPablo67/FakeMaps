@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+
+        <!-- Header Image -->
+        <ImageView
+            android:id="@+id/imagen_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginBottom="15dp" />
+
+        <!-- Name of the Place -->
+        <TextView
+            android:id="@+id/nombre_lugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="Nombre del lugar"/>
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/descripcion_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Descripción del lugar"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Address -->
+        <TextView
+            android:id="@+id/direccion_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Dirección"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Creator ID -->
+        <TextView
+            android:id="@+id/creador_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="ID del creador"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Category -->
+        <TextView
+            android:id="@+id/categoria_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Categoría"
+            android:layout_marginTop="8dp"/>
+
+        <!-- State -->
+        <TextView
+            android:id="@+id/estado_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Estado del lugar"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

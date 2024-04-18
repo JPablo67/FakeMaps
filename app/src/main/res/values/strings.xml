@@ -1,0 +1,31 @@
+<resources>
+    // main
+    <string name="app_name">FakeMaps</string>
+    <string name="txt_busqueda">Escriba el lugar que quiere buscar</string>
+    <string name="txt_iregistro">Ir a registro</string>
+    <string name="txt_irlogin">Ir a login</string>
+
+    // login
+    <string name="txt_escribacorreo">Escriba su correo</string>
+    <string name="txt_escribapass">Escriba su contrasena</string>
+    <string name="txt_login">INICIAR SESION</string>
+    <string name="txt_registro">REGISTRARSE</string>
+
+    //reguistro
+    <string name="txt_nombre">Escriba su nombre</string>
+    <string name="txt_username">Escriba su username</string>
+    <string name="txt_ciudad">Escriba su ciudad</string>
+
+    // crear lugar
+    <string name="txt_crear_lugar">CEAR LUGAR</string>
+    <string name="txt_nombre_lugar">Nombre del lugar</string>
+    <string name="txt_descripcion_lugar">Descripcion del lugar</string>
+    <string name="txt_categoria_lugar">Categoria del lugar</string>
+    <string name="txt_telefono_lugar">Telefono del lugar</string>
+    <string name="txt_direccion_lugar">Direccion del lugar</string>
+
+    // validaciones
+    <string name="es_obligatorio">Este campo es obligatorio</string>
+
+
+</resources>
