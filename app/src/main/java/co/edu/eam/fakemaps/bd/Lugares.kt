@@ -98,7 +98,9 @@ object Lugares {
         return lista.filter { l -> l.idCiudad == codigoCategoria }.toCollection(ArrayList())
     }
 
-
+    fun listarPorUsuario(userId: Int): List<Lugar> {
+        return lista.filter { it.idCreador == userId }
+    }
 
 
 }

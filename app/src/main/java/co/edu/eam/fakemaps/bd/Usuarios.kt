@@ -9,10 +9,9 @@ object Usuarios {
 
     init {
 
-        usuarios.add(Usuario(1, "Carlos", "carlos",  "carlos@gmail.com","123","Armenia"))
-        usuarios.add(Usuario(2, "Mariana", "mariana",  "mariana@gmail.com","123","Armenia"))
-        usuarios.add(Usuario(3, "Sebas", "sebas",  "sebas@gmail.com","123","Montnoir"))
-
+        usuarios.add(Usuario(1, "Alejandro",  "Alejandro@gmail.com","123", "Calarcá",false))
+        usuarios.add(Usuario(2, "Mariana",  "mariana@gmail.com","123","Armenia", false))
+        usuarios.add(Usuario(3, "Sebas",   "sebas@gmail.com","123","Montnoir", true))
         lastUserId = usuarios.maxByOrNull { it.id }?.id ?: 0
     }
 
@@ -26,11 +25,11 @@ object Usuarios {
         usuarios.add(usuario)
     }
 
-    fun login(correo:String, pass:String):Usuario{
-        val res = usuarios.first { u -> u.password == pass && u.correo == correo }
-        return res
+    // Tu función login
+    fun login(correo: String, contrasena: String): Usuario? {
+        val usuario = usuarios.find { it.correo == correo && it.password == contrasena }
+        return usuario
     }
-
     fun editar(usuario: Usuario) {
         val index = usuarios.indexOfFirst { it.id == usuario.id }
         if (index != -1) {

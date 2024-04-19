@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
-
         <!-- Header Image -->
         <ImageView
             android:id="@+id/imagen_lugar"
@@ -76,6 +75,50 @@
             android:textSize="16sp"
             android:text="Estado del lugar"
             android:layout_marginTop="8dp"/>
+
+        <!-- Comentarios Title -->
+        <TextView
+            android:id="@+id/titulo_comentarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Comentarios"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Comentarios RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewComentarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:clipToPadding="false"/>
+
+        <!-- Input for Comment -->
+        <EditText
+            android:id="@+id/editTextComentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe tu comentario aquí..."
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Button to Send Comment -->
+        <Button
+            android:id="@+id/btnEnviarComentario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enviar Comentario"
+            android:layout_marginTop="8dp"/>
+
 
     </LinearLayout>
 

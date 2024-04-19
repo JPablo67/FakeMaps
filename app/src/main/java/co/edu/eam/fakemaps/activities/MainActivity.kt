@@ -6,11 +6,11 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import co.edu.eam.fakemaps.R
+import co.edu.eam.fakemaps.bd.LocalStorage
 import co.edu.eam.fakemaps.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        LocalStorage.User = null;
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -54,11 +55,6 @@ class MainActivity : AppCompatActivity() {
     fun irALogin(v:View){
         Toast.makeText(this, "se dio click al boton de log in", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun irACrear(v:View){
-        val intent = Intent(this, CrearLugarActivity::class.java)
         startActivity(intent)
     }
 

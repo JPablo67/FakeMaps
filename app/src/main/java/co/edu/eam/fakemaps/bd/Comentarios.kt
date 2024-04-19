@@ -9,11 +9,11 @@ object Comentarios {
 
     init {
         lista.add( Comentario(1, "Super todo", 1, 1, 5))
-        lista.add( Comentario(2, "Excelentre", 1, 1, 5))
-        lista.add( Comentario(3, "Muy bien", 1, 1, 5))
-        lista.add( Comentario(4, "Bueno", 1, 1, 5))
-        lista.add( Comentario(5, "Nice", 1, 1, 5))
-        lista.add( Comentario(6, "Cool", 1, 1, 5))
+        lista.add( Comentario(2, "Excelentre", 2, 2, 5))
+        lista.add( Comentario(3, "Muy bien", 3, 3, 5))
+        lista.add( Comentario(4, "Bueno", 1, 4, 5))
+        lista.add( Comentario(5, "Nice", 2, 5, 5))
+        lista.add( Comentario(6, "Cool", 3, 5, 5))
 
         lastComentId = lista.maxByOrNull { it.id }?.id ?: 0
     }
@@ -22,7 +22,7 @@ object Comentarios {
         return lista.filter { c -> c.idLugar == idLugar }.toCollection(ArrayList())
     }
 
-    fun crear (comentario: Comentario){
+    fun crear(comentario: Comentario) {
         lastComentId++
         comentario.id = lastComentId
         lista.add(comentario)

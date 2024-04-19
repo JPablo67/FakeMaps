@@ -2,16 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/only_session"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.SessionOnlyActivity">
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#CCFFCC"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="150dp"
+        android:onClick="irALogin"
+        android:text="@string/txt_irlogin" />
 
     <LinearLayout
         android:id="@+id/caja_busqueda_menu"
@@ -47,15 +59,27 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_crearLugar"
         android:layout_width="120dp"
         android:layout_height="60dp"
-        android:text="@string/txt_irlogin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginBottom="77dp"
+        android:onClick="irACrear"
+        android:text="@string/txt_crear_lugar" />
+
+    <Button
+        android:id="@+id/btn_profile"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="irALogin"/>
+        android:onClick="irProfile"
+        android:text="@string/txt_profile" />
 
 
 </RelativeLayout>

@@ -6,13 +6,14 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.Categorias
 import co.edu.eam.fakemaps.bd.Ciudades
+import co.edu.eam.fakemaps.bd.LocalStorage
 import co.edu.eam.fakemaps.bd.Lugares
 import co.edu.eam.fakemaps.databinding.ActivityCrearLugarBinding
 import co.edu.eam.fakemaps.modelo.Categoria
@@ -28,13 +29,15 @@ class CrearLugarActivity : AppCompatActivity() {
     var posCategoria:Int = -1
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
+    private fun obtenerIdUsuarioActual(): Int {
+        return LocalStorage.User?.id?: throw IllegalStateException("El usuario no ha iniciado sesión")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityCrearLugarBinding.inflate(layoutInflater)
-        
+
         setContentView(binding.root)
 
         ciudades = Ciudades.listar()
@@ -114,7 +117,7 @@ class CrearLugarActivity : AppCompatActivity() {
         }
 
         if (nombre.isNotEmpty() && direccion.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && ciudad!=-1&&categoria!=-1){
-            val nuevoLugar = Lugar(1,nombre,descripcion,direccion,1, EstadoLugar.ACEPTADO, categoria,
+            val nuevoLugar = Lugar(1,nombre,descripcion,direccion,obtenerIdUsuarioActual(), EstadoLugar.SIN_REVISAR, categoria,
                 Posicion(8f,8f),ciudad)
 
             val telefonos:ArrayList<String> = ArrayList()
