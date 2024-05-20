@@ -45,7 +45,7 @@ class RegistroActivity : AppCompatActivity() {
         }
 
         val nombre = binding.nombreUsuario.text.toString()
-        val email = binding.emailUsuario.text.toString()
+        val email = binding.emailUsuario.text.toString().lowercase()
         val pass = binding.passUsuario.text.toString()
         val ciudad = binding.ciudadUsuario.text.toString()
 

@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/fondo_forms"
-                android:hint="@string/txt_nombre_lugar"
+                android:hint="@string/txt_direccion_lugar"
                 android:inputType="textEmailAddress"
                 />
 

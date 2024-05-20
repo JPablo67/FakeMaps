@@ -9,7 +9,7 @@ object Usuarios {
 
     init {
 
-        usuarios.add(Usuario(1, "Alejandro",  "Alejandro@gmail.com","123", "Calarcá",false))
+        usuarios.add(Usuario(1, "Alejandro",  "alejandro@gmail.com","123", "Calarcá",false))
         usuarios.add(Usuario(2, "Mariana",  "mariana@gmail.com","123","Armenia", false))
         usuarios.add(Usuario(3, "Sebas",   "sebas@gmail.com","123","Montnoir", true))
         lastUserId = usuarios.maxByOrNull { it.id }?.id ?: 0

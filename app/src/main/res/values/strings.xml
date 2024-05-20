@@ -4,6 +4,7 @@
     <string name="txt_busqueda">Escriba el lugar que quiere buscar</string>
     <string name="txt_iregistro">IR A REGISTRO</string>
     <string name="txt_irlogin">IR AL LOGIN</string>
+    <string name="txt_cerrar_sesion">CERRAR SESION</string>
 
     // login
     <string name="txt_escribacorreo">Escriba su correo</string>

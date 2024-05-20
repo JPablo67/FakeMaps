@@ -25,26 +25,26 @@
 
         <Button
             android:id="@+id/btn_profile"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="60dp"
             android:onClick="irProfile"
             android:text="@string/txt_profile" />
 
         <Button
             android:id="@+id/btn_crearLugar"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="60dp"
             android:layout_marginTop="0dp"
             android:onClick="irACrear"
             android:text="@string/txt_crear_lugar" />
 
         <Button
-            android:id="@+id/btn_login"
-            android:layout_width="100dp"
+            android:id="@+id/btn_cerrar_sesion"
+            android:layout_width="110dp"
             android:layout_height="60dp"
             android:layout_marginTop="0dp"
-            android:onClick="irALogin"
-            android:text="@string/txt_irlogin" />
+            android:onClick="irAMain"
+            android:text="@string/txt_cerrar_sesion" />
     </LinearLayout>
 
     <LinearLayout

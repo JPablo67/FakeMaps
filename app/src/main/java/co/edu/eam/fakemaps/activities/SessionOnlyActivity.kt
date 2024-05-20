@@ -1,5 +1,6 @@
 package co.edu.eam.fakemaps.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +44,8 @@ class SessionOnlyActivity : AppCompatActivity() {
             }
             false
         }
+
+
     }
 
     fun irALogin(v: View) {
@@ -58,6 +61,14 @@ class SessionOnlyActivity : AppCompatActivity() {
 
     fun  irProfile(v: View){
         val intent = Intent(this, ClienteActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun irAMain(v:View){
+        val sharedPreferences = this.getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
+        sharedPreferences.clear()
+        sharedPreferences.apply()
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }

@@ -1,5 +1,6 @@
 package co.edu.eam.fakemaps.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -30,7 +31,11 @@ class CrearLugarActivity : AppCompatActivity() {
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
     private fun obtenerIdUsuarioActual(): Int {
-        return LocalStorage.User?.id?: throw IllegalStateException("El usuario no ha iniciado sesión")
+        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+
+        val id = sp.getInt("id_user",0)
+
+        return id
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
