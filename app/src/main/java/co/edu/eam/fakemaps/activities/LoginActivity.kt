@@ -30,9 +30,15 @@ class LoginActivity : AppCompatActivity() {
         if (correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
 
             when(tipo){
-                "usuario" -> startActivity(Intent(this,MainActivity::class.java))
+                "usuario" -> {
+                    val i = Intent(this,MainActivity::class.java)
+
+                    startActivity(i)
+
+                }
                 "admin" -> startActivity(Intent(this,MainActivity::class.java))
             }
+            finish()
         }else{
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)

@@ -4,15 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.LocalStorage
 import co.edu.eam.fakemaps.databinding.ActivityMainBinding
+import co.edu.eam.fakemaps.fragmentos.CuentaFragment
+import co.edu.eam.fakemaps.fragmentos.FavoritosFragment
+import co.edu.eam.fakemaps.fragmentos.InicioFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,9 +36,18 @@ class MainActivity : AppCompatActivity() {
         if (correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
 
             when(tipo){
-                "usuario" -> startActivity(Intent(this,SessionOnlyActivity::class.java))
-                "admin" -> startActivity(Intent(this,AdminActivity::class.java))
+                "usuario" -> {
+                    val i = Intent(this,SessionOnlyActivity::class.java)
+
+                    startActivity(i)
+
+                }
+                "admin" -> {
+                    val i = Intent(this,AdminActivity::class.java)
+                    startActivity(i)
+                }
             }
+            finish()
         }else{
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
@@ -45,27 +59,35 @@ class MainActivity : AppCompatActivity() {
                 insets
             }
 
-            binding.txtBusqueda.setOnEditorActionListener{textView,i,keyEvent ->
-                if(i == EditorInfo.IME_ACTION_SEARCH){
 
-                    val busqueda = binding.txtBusqueda.text.toString()
-                    if(busqueda.isNotEmpty()){
-                        val intent = Intent(baseContext,ResultadoBusquedaActivity::class.java)
-                        intent.putExtra("texto", busqueda)
-                        startActivity(intent)
-                        Log.e("MainActivity",binding.txtBusqueda.text.toString())
+        }
 
-                    }
-
-
-                }
-                true
+        binding.barraInferior.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.menu_inicio -> reemplazarFragmento(1)
+                R.id.menu_favoritos -> reemplazarFragmento(2)
+                R.id.menu_mi_cuenta -> reemplazarFragmento(3)
             }
+            true
         }
 
 
 
+    }
 
+    fun reemplazarFragmento(valor:Int){
+
+        var fragmento: Fragment
+
+        if (valor == 1){
+            fragmento = InicioFragment()
+        }else if(valor == 2){
+            fragmento = FavoritosFragment()
+        }else{
+            fragmento = CuentaFragment()
+        }
+        supportFragmentManager.beginTransaction().replace(binding.contenidoPrincipal.id, fragmento)
+            .addToBackStack("fragento $valor").commit()
     }
 
     fun irALogin(v:View){
