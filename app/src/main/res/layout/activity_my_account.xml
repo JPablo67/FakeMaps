@@ -51,24 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Location"
                 android:textSize="16sp"
-                android:paddingBottom="50dp"
                 android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/btn_crearLugar"
-                android:layout_width="110dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="0dp"
-
-                android:text="@string/txt_crear_lugar" />
-
-            <Button
-                android:id="@+id/btn_cerrar_sesion"
-                android:layout_width="110dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="0dp"
-
-                android:text="@string/txt_cerrar_sesion" />
 
 
         </LinearLayout>

@@ -27,21 +27,16 @@ class MenuPrincipalFragment : Fragment() {
 
         binding.txtBusqueda.setOnEditorActionListener{textView,i,keyEvent ->
             if(i == EditorInfo.IME_ACTION_SEARCH){
-
                 val busqueda = binding.txtBusqueda.text.toString()
                 if(busqueda.isNotEmpty()){
                     val intent = Intent(activity, ResultadoBusquedaActivity::class.java)
                     intent.putExtra("texto", busqueda)
                     startActivity(intent)
                     Log.e("MainActivity",binding.txtBusqueda.text.toString())
-
                 }
-
-
             }
             true
         }
-
         return binding.root
     }
 }

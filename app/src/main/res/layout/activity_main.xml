@@ -8,15 +8,12 @@
     tools:context=".activities.MainActivity">
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#CCFFCC"/>
+
 
     <FrameLayout
         android:id="@+id/contenido_principal"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:background="@color/white"/>
 
     <fragment
@@ -24,16 +21,7 @@
         android:layout_height="wrap_content"
         class="co.edu.eam.fakemaps.fragmentos.MenuPrincipalFragment"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btn_login"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:text="@string/txt_irlogin"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@id/barra_inferior"
-        android:layout_alignParentRight="true"
-        android:onClick="irALogin"/>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barra_inferior"

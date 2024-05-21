@@ -6,10 +6,9 @@
     android:background="@color/cast_seekbar_secondary_progress_color"
     tools:context=".fragmentos.InicioFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#CCFFCC"/>
 
 </FrameLayout>

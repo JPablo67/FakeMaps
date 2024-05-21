@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.play.services.cast.framework)
     implementation(libs.firebase.perf.ktx)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.activity)
 
     testImplementation("junit:junit:${Libs.junit_version}")
     androidTestImplementation("androidx.test.ext:junit:${Libs.androidx_junit_version}")

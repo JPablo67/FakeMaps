@@ -1,7 +1,7 @@
 <resources>
     // main
     <string name="app_name">FakeMaps</string>
-    <string name="txt_busqueda">Escriba el lugar que quiere buscar</string>
+    <string name="txt_busqueda">Buscar Lugar</string>
     <string name="txt_iregistro">IR A REGISTRO</string>
     <string name="txt_irlogin">IR AL LOGIN</string>
     <string name="txt_cerrar_sesion">CERRAR SESION</string>

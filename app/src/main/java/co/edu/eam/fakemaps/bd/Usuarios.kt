@@ -15,6 +15,11 @@ object Usuarios {
         lastUserId = usuarios.maxByOrNull { it.id }?.id ?: 0
     }
 
+    fun obtenerUsuarioPorId(id: Int): Usuario? {
+        return usuarios.find { it.id == id }
+    }
+
+
     fun listar():ArrayList<Usuario>{
         return usuarios
     }

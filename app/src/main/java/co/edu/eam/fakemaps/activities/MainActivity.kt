@@ -26,32 +26,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        LocalStorage.User = null;
-
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
 
         val correo = sp.getString("correo_usuario","")
         val tipo = sp.getString("tipo_usuario","")
 
-        if (correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
+        LocalStorage.User = null;
+
+        if (correo!!.isNotEmpty() && tipo!!.isNotEmpty() && tipo != "usuario"){
 
             when(tipo){
-                "usuario" -> {
-                    val i = Intent(this,SessionOnlyActivity::class.java)
 
-                    startActivity(i)
-
-                }
                 "admin" -> {
                     val i = Intent(this,AdminActivity::class.java)
                     startActivity(i)
+                    finish()
                 }
             }
-            finish()
+
         }else{
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
+            if (savedInstanceState == null) {
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.contenidoPrincipal.id, InicioFragment())
+                    .commit()
+            }
 
             ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -75,20 +76,33 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun reemplazarFragmento(valor:Int){
+    fun reemplazarFragmento(valor: Int) {
 
-        var fragmento: Fragment
+        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val correo = sp.getString("correo_usuario", "")
 
-        if (valor == 1){
-            fragmento = InicioFragment()
-        }else if(valor == 2){
-            fragmento = FavoritosFragment()
-        }else{
-            fragmento = CuentaFragment()
+        var fragmento: Fragment? = null
+
+        when (valor) {
+            1 -> fragmento = InicioFragment()
+            2 -> fragmento = FavoritosFragment()
+            else -> {
+                if (correo.isNullOrEmpty()) {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    return // Return early to avoid executing the fragment transaction
+                } else {
+                    fragmento = CuentaFragment()
+                }
+            }
         }
-        supportFragmentManager.beginTransaction().replace(binding.contenidoPrincipal.id, fragmento)
-            .addToBackStack("fragento $valor").commit()
+
+        fragmento?.let {
+            supportFragmentManager.beginTransaction().replace(binding.contenidoPrincipal.id, it)
+                .addToBackStack("fragmento $valor").commit()
+        }
     }
+
 
     fun irALogin(v:View){
 

@@ -31,7 +31,7 @@
             android:id="@+id/txt_busqueda"
             android:layout_width="290dp"
             android:layout_height="50dp"
-            android:hint="Nombre del lugar"
+            android:hint="@string/txt_busqueda"
             android:imeOptions="actionSearch"
             android:singleLine="true"
             android:paddingStart="20dp"

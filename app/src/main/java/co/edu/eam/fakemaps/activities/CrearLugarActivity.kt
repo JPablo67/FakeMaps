@@ -130,6 +130,7 @@ class CrearLugarActivity : AppCompatActivity() {
             nuevoLugar.telefonos = telefonos
             Lugares.crear(nuevoLugar)
             Log.e("CrearLugarActivity",Lugares.listar().toString())
+
         }else{
 
         }
