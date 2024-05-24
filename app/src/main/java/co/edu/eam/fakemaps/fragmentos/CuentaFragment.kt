@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.activities.CrearLugarActivity
 import co.edu.eam.fakemaps.activities.MainActivity
+import co.edu.eam.fakemaps.activities.MisLugaresActivity
 import co.edu.eam.fakemaps.bd.Usuarios
 import co.edu.eam.fakemaps.databinding.ActivityMyAccountBinding
 import co.edu.eam.fakemaps.databinding.FragmentCuentaBinding
@@ -47,7 +48,8 @@ class CuentaFragment : Fragment() {
 
         }
         binding.btnCrearLugar.setOnClickListener { irACrear() }
-        binding.btnCerrarSesion.setOnClickListener{cerrarSesion()}
+        binding.btnCerrarSesion.setOnClickListener{ cerrarSesion() }
+        binding.btnMisLugares.setOnClickListener{ irAMisLuagares() }
         return binding.root
     }
 
@@ -62,6 +64,11 @@ class CuentaFragment : Fragment() {
 
     fun irACrear() {
         val intent = Intent(requireActivity(), CrearLugarActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun irAMisLuagares() {
+        val intent = Intent(requireActivity(), MisLugaresActivity::class.java)
         startActivity(intent)
     }
 }

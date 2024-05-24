@@ -22,6 +22,9 @@ import co.edu.eam.fakemaps.fragmentos.InicioFragment
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+    private var MENU_INICIO = "inicio"
+    private var MENU_FAVORITOS = "favoritos"
+    private var MENU_MICUENTA = "mi cuenta"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +68,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.barraInferior.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.menu_inicio -> reemplazarFragmento(1)
-                R.id.menu_favoritos -> reemplazarFragmento(2)
-                R.id.menu_mi_cuenta -> reemplazarFragmento(3)
+                R.id.menu_inicio -> reemplazarFragmento(1, MENU_INICIO)
+                R.id.menu_favoritos -> reemplazarFragmento(2, MENU_FAVORITOS)
+                R.id.menu_mi_cuenta -> reemplazarFragmento(3, MENU_MICUENTA)
             }
             true
         }
@@ -76,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun reemplazarFragmento(valor: Int) {
+    fun reemplazarFragmento(valor: Int, nombre:String) {
 
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val correo = sp.getString("correo_usuario", "")
@@ -99,7 +102,25 @@ class MainActivity : AppCompatActivity() {
 
         fragmento?.let {
             supportFragmentManager.beginTransaction().replace(binding.contenidoPrincipal.id, it)
-                .addToBackStack("fragmento $valor").commit()
+                .addToBackStack(nombre).commit()
+        }
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val count = supportFragmentManager.backStackEntryCount
+
+        if (count > 0) {
+            val nombre = supportFragmentManager.getBackStackEntryAt(count - 1).name
+            when (nombre) {
+                MENU_INICIO -> binding.barraInferior.menu.getItem(0).isChecked = true
+                MENU_FAVORITOS -> binding.barraInferior.menu.getItem(1).isChecked = true
+                else -> binding.barraInferior.menu.getItem(2).isChecked = true
+            }
+        } else {
+            // No fragments in back stack, so select the default menu item
+            binding.barraInferior.menu.getItem(0).isChecked = true
         }
     }
 

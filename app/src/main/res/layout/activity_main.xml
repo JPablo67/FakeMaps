@@ -19,14 +19,15 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        class="co.edu.eam.fakemaps.fragmentos.MenuPrincipalFragment"/>
+        class="co.edu.eam.fakemaps.fragmentos.SearchBarFragment"/>
 
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barra_inferior"
         android:layout_width="match_parent"
-        android:layout_height="69dp"
+        android:layout_height="67dp"
+
         android:layout_alignParentBottom="true"
         app:menu="@menu/barra_inferior"/>
 

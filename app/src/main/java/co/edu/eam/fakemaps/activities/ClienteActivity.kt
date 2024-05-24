@@ -41,7 +41,7 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         try {
-            lugares.addAll(Lugares.listarPorUsuario(userId.id))
+            lugares.addAll(Lugares.buscarPorUsuario(userId.id))
             lugarAdapter.notifyDataSetChanged()
 
             if (lugares.isEmpty()) {

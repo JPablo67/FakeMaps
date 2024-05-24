@@ -4,6 +4,7 @@ import co.edu.eam.fakemaps.modelo.EstadoLugar
 import co.edu.eam.fakemaps.modelo.Horario
 import co.edu.eam.fakemaps.modelo.Lugar
 import co.edu.eam.fakemaps.modelo.Posicion
+import java.util.Calendar
 
 object Lugares {
 
@@ -25,13 +26,13 @@ object Lugares {
         val lugar3 = Lugar(3, "Bar 123", "Parchado", "Cra 25",1,EstadoLugar.ACEPTADO, 5, Posicion(73.3434f,-40.4345f), 1)
         lugar3.horarios.add(horario3)
 
-        val lugar4 = Lugar(4, "Taller 123", "Lindo", "Cra 25",1,EstadoLugar.ACEPTADO, 4, Posicion(73.3434f,-40.4345f), 1)
+        val lugar4 = Lugar(4, "Taller 123", "Lindo", "Cra 25",2,EstadoLugar.ACEPTADO, 4, Posicion(73.3434f,-40.4345f), 1)
         lugar1.horarios.add(horario1)
 
-        val lugar5 = Lugar(5, "Restaurante Fulanito", "Rico", "Cra 25",1,EstadoLugar.ACEPTADO, 3, Posicion(73.3434f,-40.4345f), 1)
+        val lugar5 = Lugar(5, "Restaurante Fulanito", "Rico", "Cra 25",2,EstadoLugar.ACEPTADO, 3, Posicion(73.3434f,-40.4345f), 1)
         lugar2.horarios.add(horario2)
 
-        val lugar6 = Lugar(6, "Discoteca 456", "Parchado", "Cra 25",1,EstadoLugar.ACEPTADO, 5, Posicion(73.3434f,-40.4345f), 1)
+        val lugar6 = Lugar(6, "Discoteca 456", "Parchado", "Cra 25",2, EstadoLugar.ACEPTADO, 5, Posicion(73.3434f,-40.4345f), 1)
         lugar3.horarios.add(horario3)
 
         lista.add(lugar1)
@@ -45,6 +46,8 @@ object Lugares {
 
 
     }
+
+
 
     fun crear(lugar:Lugar){
         lastLugarId++
@@ -98,7 +101,7 @@ object Lugares {
         return lista.filter { l -> l.idCiudad == codigoCategoria }.toCollection(ArrayList())
     }
 
-    fun listarPorUsuario(userId: Int): List<Lugar> {
+    fun buscarPorUsuario(userId: Int): List<Lugar> {
         return lista.filter { it.idCreador == userId }
     }
 

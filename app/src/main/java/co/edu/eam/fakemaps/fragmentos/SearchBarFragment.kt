@@ -10,20 +10,18 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.activities.ResultadoBusquedaActivity
-import co.edu.eam.fakemaps.databinding.ActivityAdminBinding
-import co.edu.eam.fakemaps.databinding.FragmentMenuPrincipalBinding
+import co.edu.eam.fakemaps.databinding.FragmentSearchBarBinding
 
 
-class MenuPrincipalFragment : Fragment() {
-
-    lateinit var binding: FragmentMenuPrincipalBinding
+class SearchBarFragment : Fragment() {
+    lateinit var binding: FragmentSearchBarBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentMenuPrincipalBinding.inflate(inflater,container,false)
+        binding = FragmentSearchBarBinding.inflate(inflater,container,false)
 
         binding.txtBusqueda.setOnEditorActionListener{textView,i,keyEvent ->
             if(i == EditorInfo.IME_ACTION_SEARCH){

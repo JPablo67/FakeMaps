@@ -8,13 +8,10 @@
     android:orientation="vertical"
     tools:context=".activities.ResultadoBusquedaActivity">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        class="co.edu.eam.fakemaps.fragmentos.SearchBarFragment"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listarLugaresBusqueda"
+        android:id="@+id/listarMisLugaresBusqueda"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

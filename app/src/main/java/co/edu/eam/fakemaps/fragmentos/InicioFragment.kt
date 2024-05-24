@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.databinding.FragmentInicioBinding
-import co.edu.eam.fakemaps.databinding.FragmentMenuPrincipalBinding
+import co.edu.eam.fakemaps.databinding.FragmentSearchBarBinding
 
 class InicioFragment : Fragment() {
 
