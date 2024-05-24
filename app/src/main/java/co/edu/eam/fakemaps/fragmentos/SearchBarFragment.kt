@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import co.edu.eam.fakemaps.R
+import co.edu.eam.fakemaps.activities.MainActivity
 import co.edu.eam.fakemaps.activities.ResultadoBusquedaActivity
 import co.edu.eam.fakemaps.databinding.FragmentSearchBarBinding
 
@@ -34,6 +35,10 @@ class SearchBarFragment : Fragment() {
                 }
             }
             true
+        }
+
+        binding.btnMenu.setOnClickListener {
+            (requireActivity() as MainActivity).mostrarBarraNav()
         }
         return binding.root
     }

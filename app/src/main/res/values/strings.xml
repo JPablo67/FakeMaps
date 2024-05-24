@@ -37,4 +37,10 @@
     <string name="txt_favoritos_menu">Favoritos</string>
     <string name="txt_micuenta_menu">Mi Cuenta</string>
 
+    <string name="lugares_rechazados">lugares rechazados</string>
+    <string name="perfil">Perfil</string>
+    <string name="cambiar_idioma">Cambiar idioma</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="mas_opciones">Más opciones</string>
+
 </resources>

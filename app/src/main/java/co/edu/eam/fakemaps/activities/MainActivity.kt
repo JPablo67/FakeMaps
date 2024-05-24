@@ -9,8 +9,10 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.LocalStorage
@@ -18,8 +20,10 @@ import co.edu.eam.fakemaps.databinding.ActivityMainBinding
 import co.edu.eam.fakemaps.fragmentos.CuentaFragment
 import co.edu.eam.fakemaps.fragmentos.FavoritosFragment
 import co.edu.eam.fakemaps.fragmentos.InicioFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var binding: ActivityMainBinding
     private var MENU_INICIO = "inicio"
@@ -33,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         val correo = sp.getString("correo_usuario","")
         val tipo = sp.getString("tipo_usuario","")
+
+
 
         LocalStorage.User = null;
 
@@ -74,6 +80,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+
 
 
 
@@ -138,6 +146,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun mostrarBarraNav(){
+        binding.main.openDrawer(GravityCompat.START)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.btn_cerrar_sesion
+//        }
+        return false
+    }
 
 
 }

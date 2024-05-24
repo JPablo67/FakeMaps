@@ -1,20 +1,20 @@
 package co.edu.eam.fakemaps.modelo
 
-class Comentario(
-    var id:Int,
-    var texto:String,
-    var idUsuario:Int,
-    var idLugar:Int,
-    var calificacion:Int,
-    ) {// En Comentario.kt
+import java.util.Date
 
-    fun copy(
-        id: Int = this.id,
-        texto: String = this.texto,
-        idUsuario: Int = this.idUsuario,
-        idLugar: Int = this.idLugar,
-        calificacion: Int = this.calificacion
-    ) = Comentario(id, texto, idUsuario, idLugar, calificacion)
+class Comentario() {
+
+    constructor(texto:String, idUsuario:Int, calificacion:Int):this(){
+        this.texto = texto
+        this.idUsuario = idUsuario
+        this.calificacion = calificacion
+    }
+
+    var key:String = ""
+    var texto:String = ""
+    var idUsuario:Int = 0
+    var calificacion:Int = 0
+    var fecha: Date = Date()
 
 
 }

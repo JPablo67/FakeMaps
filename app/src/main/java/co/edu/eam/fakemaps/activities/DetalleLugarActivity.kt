@@ -1,11 +1,16 @@
 package co.edu.eam.fakemaps.activities
 
 import ComentarioAdapter
+import android.content.Context
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.Comentarios
@@ -19,6 +24,8 @@ class DetalleLugarActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetalleLugarBinding
     var idLugar: Int = 0
+    private var colorPorDefecto: Int = 0
+    private var estrellas = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +38,13 @@ class DetalleLugarActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        colorPorDefecto = binding.estrellas.e1.textColors.defaultColor
+
+        for ( i in 0 until binding.estrellas.lista.childCount){
+            (binding.estrellas.lista[i] as TextView).setOnClickListener { presionarEstrella(i) }
+        }
+
 
         idLugar = intent.extras!!.getInt("codigo")
         val lugar = Lugares.buscarById(idLugar)
@@ -49,7 +63,7 @@ class DetalleLugarActivity : AppCompatActivity() {
         binding.categoriaLugar.text = lugar.idCategoria.toString()
 
         // Configurar los comentarios
-        val comentarios = Comentarios.listar(idLugar)
+        val comentarios = lugar.comentarios
         val comentarioAdapter = ComentarioAdapter(comentarios)
         binding.recyclerViewComentarios.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewComentarios.adapter = comentarioAdapter
@@ -59,21 +73,39 @@ class DetalleLugarActivity : AppCompatActivity() {
             val textoComentario = binding.editTextComentario.text.toString()
 
             if (textoComentario.isNotEmpty()) {
-                val idUsuario = LocalStorage.User?.id
+
+                val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+                val id = sp.getInt("id_user",0)
+                val idUsuario = id
 
                 if (idUsuario != null) {
-                    Comentarios.crear(Comentario(0, textoComentario, idUsuario, idLugar, 5)) // 5 es una calificación de ejemplo
+                    lugar.comentarios.add(Comentario(textoComentario, idUsuario, estrellas)) // 5 es una calificación de ejemplo
                     Toast.makeText(this, "Comentario enviado", Toast.LENGTH_SHORT).show()
                     binding.editTextComentario.text.clear()
 
                     // Actualizar la lista de comentarios
-                    comentarioAdapter.actualizarComentarios(Comentarios.listar(idLugar))
+                    comentarioAdapter.actualizarComentarios(comentarios)
                 } else {
                     Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "El comentario no puede estar vacío", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun presionarEstrella(pos:Int){
+        estrellas = pos+1
+        borrarSeleccion()
+        for( i in 0..pos ){
+            (binding.estrellas.lista[i] as TextView).setTextColor( ContextCompat.getColor(this, R.color.yellow) )
+        }
+    }
+
+
+    private fun borrarSeleccion(){
+        for ( i in 0 until binding.estrellas.lista.childCount){
+            (binding.estrellas.lista[i] as TextView).setTextColor( colorPorDefecto )
         }
     }
 }
