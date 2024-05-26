@@ -11,25 +11,30 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.DialogFragment
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.Categorias
 import co.edu.eam.fakemaps.bd.Ciudades
+import co.edu.eam.fakemaps.bd.Horarios
 import co.edu.eam.fakemaps.bd.LocalStorage
 import co.edu.eam.fakemaps.bd.Lugares
 import co.edu.eam.fakemaps.databinding.ActivityCrearLugarBinding
+import co.edu.eam.fakemaps.fragmentos.HorarioDialogoFragment
 import co.edu.eam.fakemaps.modelo.Categoria
 import co.edu.eam.fakemaps.modelo.Ciudad
 import co.edu.eam.fakemaps.modelo.EstadoLugar
+import co.edu.eam.fakemaps.modelo.Horario
 import co.edu.eam.fakemaps.modelo.Lugar
 import co.edu.eam.fakemaps.modelo.Posicion
 
-class CrearLugarActivity : AppCompatActivity() {
+class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorarioCreadoListener{
 
     lateinit var binding: ActivityCrearLugarBinding
     var posCiudad:Int = -1
     var posCategoria:Int = -1
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
+    lateinit var horarios:ArrayList<Horario>
     private fun obtenerIdUsuarioActual(): Int {
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
 
@@ -45,6 +50,8 @@ class CrearLugarActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        horarios = ArrayList()
+
         ciudades = Ciudades.listar()
         categorias = Categorias.listar()
 
@@ -58,7 +65,7 @@ class CrearLugarActivity : AppCompatActivity() {
         cargarCategorias()
 
 
-
+        binding.asignarHorario.setOnClickListener { mostrarDialogo() }
         binding.btnCrearLugar.setOnClickListener{crearLugar()}
     }
 
@@ -121,14 +128,16 @@ class CrearLugarActivity : AppCompatActivity() {
             binding.direccionLugarLayout.error = null
         }
 
-        if (nombre.isNotEmpty() && direccion.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && ciudad!=-1&&categoria!=-1){
+        if (nombre.isNotEmpty() && direccion.isNotEmpty() && horarios.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && ciudad!=-1&&categoria!=-1){
             val nuevoLugar = Lugar(1,nombre,descripcion,direccion,obtenerIdUsuarioActual(), EstadoLugar.SIN_REVISAR, categoria,
                 Posicion(8f,8f),ciudad)
 
             val telefonos:ArrayList<String> = ArrayList()
             telefonos.add(telefono)
             nuevoLugar.telefonos = telefonos
+            nuevoLugar.horarios = horarios
             Lugares.crear(nuevoLugar)
+            Log.e("LUGAR CREADO", nuevoLugar.toString())
             Log.e("CrearLugarActivity",Lugares.listar().toString())
 
         }else{
@@ -136,5 +145,16 @@ class CrearLugarActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun mostrarDialogo(){
+        val dialog = HorarioDialogoFragment()
+        dialog.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogoTitulo)
+        dialog.listener=this
+        dialog.show(supportFragmentManager,"Agregar")
+    }
+
+    override fun elegirHorario(horario: Horario) {
+        horarios.add(horario)
     }
 }

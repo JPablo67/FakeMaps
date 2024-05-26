@@ -1,6 +1,7 @@
 package co.edu.eam.fakemaps.activities
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ import co.edu.eam.fakemaps.databinding.ActivityMainBinding
 import co.edu.eam.fakemaps.fragmentos.CuentaFragment
 import co.edu.eam.fakemaps.fragmentos.FavoritosFragment
 import co.edu.eam.fakemaps.fragmentos.InicioFragment
+import co.edu.eam.fakemaps.utils.Idioma
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -80,6 +82,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
             true
         }
+
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        navView.setNavigationItemSelectedListener(this)
 
 
 
@@ -151,11 +156,38 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId){
-//            R.id.btn_cerrar_sesion
-//        }
-        return false
+        when(item.itemId){
+            R.id.menu_cambiar_idioma -> {
+//                cambiarIdioma()
+            }
+        }
+        item.isChecked = true
+        findViewById<DrawerLayout>(R.id.main).closeDrawer(GravityCompat.START)
+        return true // Indicate the event was handled
     }
+
+//    fun cambiarIdioma(){
+//        Idioma.selecionarIdioma(this)
+//
+//        val intent = intent
+//        if (intent != null) {
+//            intent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            this.finish()
+//            this.startActivity(intent)
+//        }
+//    }
+//    override fun attachBaseContext(newBase: Context?) {
+//        val localeUpdatedContext: ContextWrapper? = Idioma.cambiarIdioma(newBase!!)
+//        super.attachBaseContext(localeUpdatedContext)
+//    }
+
+
+
+
+
+
+
+
 
 
 }

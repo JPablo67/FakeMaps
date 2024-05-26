@@ -1,6 +1,7 @@
 package co.edu.eam.fakemaps.adapter
 
 import android.content.Intent
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -59,18 +60,19 @@ class LugarAdapter(private val lista: MutableList<Lugar>) : RecyclerView.Adapter
         fun bind(lugar: Lugar) {
             this.lugar = lugar
             nombre.text = lugar.nombre
-            horario.text = "Cierra a las 2:00"
+            horario.text = ""
             direccion.text = lugar.direccion
             val estaAbierto = lugar.estaAbierto()
             if(estaAbierto){
-                view.estadoLugar.text = "Abierto"
+                view.estadoLugar.text = itemView.context.getString(R.string.abierto)
                 view.estadoLugar.setTextColor( ContextCompat.getColor(itemView.context, R.color.light_green ) )
-                view.horarioLugar.text = "Cierra a las ${lugar.obtenerHoraCierre()}"
+                view.horarioLugar.text = itemView.context.getString(R.string.cierra_a_las)+" "+lugar.obtenerHoraCierre()
+                Log.e("Fr",R.string.cierra_a_las.toString())
             }else{
                 Log.e("Lugar adapter", "this")
-                view.estadoLugar.text = "Cerrado"
+                view.estadoLugar.text = itemView.context.getString(R.string.cerrado)
                 view.estadoLugar.setTextColor( ContextCompat.getColor(itemView.context, R.color.red_accent ) )
-                view.horarioLugar.text = "Abre el ${lugar.obtenerHoraApertura()}"
+                view.horarioLugar.text = itemView.context.getString(R.string.abre_el)+" "+lugar.obtenerHoraApertura()
             }
 
             val comentarios:ArrayList<Comentario> = lugar.comentarios

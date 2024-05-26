@@ -1,0 +1,54 @@
+<resources>
+    <!-- main -->
+    <string name="app_name">FakeMaps</string>
+    <string name="txt_busqueda">Rechercher un lieu</string>
+    <string name="txt_iregistro">ALLER À L INSCRIPTION</string>
+    <string name="txt_irlogin">ALLER À LA CONNEXION</string>
+    <string name="txt_cerrar_sesion">SE DÉCONNECTER</string>
+
+    <!-- login -->
+    <string name="txt_escribacorreo">Entrez votre email</string>
+    <string name="txt_escribapass">Entrez votre mot de passe</string>
+    <string name="txt_login">SE CONNECTER</string>
+    <string name="txt_registro">S INSCRIRE</string>
+
+    <!-- registration -->
+    <string name="txt_nombre">Entrez votre nom</string>
+    <string name="txt_id">Entrez votre identifiant</string>
+    <string name="txt_ciudad">Entrez votre ville</string>
+
+    <!-- create place -->
+    <string name="txt_mis_lugares">MES LIEUX</string>
+    <string name="txt_crear_lugar">CRÉER UN LIEU</string>
+    <string name="txt_nombre_lugar">Nom du lieu</string>
+    <string name="txt_descripcion_lugar">Description du lieu</string>
+    <string name="txt_categoria_lugar">Catégorie du lieu</string>
+    <string name="txt_telefono_lugar">Téléphone du lieu</string>
+    <string name="txt_direccion_lugar">Adresse du lieu</string>
+
+    <!-- validations -->
+    <string name="es_obligatorio">Ce champ est obligatoire</string>
+    <string name="txt_profile">PROFIL</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
+
+    <!-- menu -->
+    <string name="txt_inicio_menu">Accueil</string>
+    <string name="txt_favoritos_menu">Favoris</string>
+    <string name="txt_micuenta_menu">Mon Compte</string>
+
+    <string name="lugares_rechazados">lieux rejetés</string>
+    <string name="perfil">Profil</string>
+    <string name="cambiar_idioma">Changer de langue</string>
+    <string name="cerrar_sesion">Se déconnecter</string>
+    <string name="mas_opciones">Plus d options</string>
+
+    <!-- Lugar adapter -->
+    <string name="cierra_a_las">Ferme à </string>
+    <string name="abierto">Ouvert</string>
+    <string name="cerrado">Fermé</string>
+    <string name="abre_el">Ouvre à </string>
+    <string name="hora_incio">Hora incio</string>
+    <string name="hora_cierre">Hora cierre</string>
+    <string name="anadir_horario">Anadir horario</string>
+</resources>

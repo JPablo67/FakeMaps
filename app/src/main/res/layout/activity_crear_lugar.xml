@@ -85,6 +85,24 @@
             android:background="@drawable/fondo_forms"
             android:layout_marginBottom="10dp"/>
 
+        <LinearLayout
+            android:id="@+id/lista_horarios"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/asignar_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aasignar Horario"/>
+
+
+        </LinearLayout>
+
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/telefonoLugar_layout"
             style="@style/til_form">

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".fragmentos.HorarioDialogoFragment">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horario Lugar"/>
+
+
+        <Spinner
+            android:id="@+id/dia_semana"
+            style="@style/spinner_form"/>
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hora_inicio_layout"
+        style="@style/til_form">
+
+        <EditText
+            android:id="@+id/hora_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fondo_forms"
+            android:hint="@string/hora_incio"
+            android:inputType="time"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hora_cierre_layout"
+        style="@style/til_form">
+
+        <EditText
+            android:id="@+id/hora_cierre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fondo_forms"
+            android:hint="@string/hora_cierre"
+            android:inputType="time"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/agregar_horario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/anadir_horario"/>
+
+
+
+</LinearLayout>

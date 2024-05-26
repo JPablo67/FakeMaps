@@ -29,13 +29,12 @@
             android:exported="false" />
         <activity
             android:name=".activities.CrearLugarActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".activities.SessionOnlyActivity"
-            android:exported="false" />
+
         <activity
             android:name=".activities.RegistroActivity"
             android:exported="false" />

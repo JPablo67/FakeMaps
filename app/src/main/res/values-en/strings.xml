@@ -1,0 +1,54 @@
+<resources>
+    <!-- main -->
+    <string name="app_name">FakeMaps</string>
+    <string name="txt_busqueda">Search Place</string>
+    <string name="txt_iregistro">GO TO REGISTRATION</string>
+    <string name="txt_irlogin">GO TO LOGIN</string>
+    <string name="txt_cerrar_sesion">LOG OUT</string>
+
+    <!-- login -->
+    <string name="txt_escribacorreo">Enter your email</string>
+    <string name="txt_escribapass">Enter your password</string>
+    <string name="txt_login">LOG IN</string>
+    <string name="txt_registro">REGISTER</string>
+
+    <!-- registration -->
+    <string name="txt_nombre">Enter your name</string>
+    <string name="txt_id">Enter your ID</string>
+    <string name="txt_ciudad">Enter your city</string>
+
+    <!-- create place -->
+    <string name="txt_mis_lugares">MY PLACES</string>
+    <string name="txt_crear_lugar">CREATE PLACE</string>
+    <string name="txt_nombre_lugar">Place name</string>
+    <string name="txt_descripcion_lugar">Place description</string>
+    <string name="txt_categoria_lugar">Place category</string>
+    <string name="txt_telefono_lugar">Place phone</string>
+    <string name="txt_direccion_lugar">Place address</string>
+
+    <!-- validations -->
+    <string name="es_obligatorio">This field is required</string>
+    <string name="txt_profile">PROFILE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- menu -->
+    <string name="txt_inicio_menu">Home</string>
+    <string name="txt_favoritos_menu">Favorites</string>
+    <string name="txt_micuenta_menu">My Account</string>
+
+    <string name="lugares_rechazados">rejected places</string>
+    <string name="perfil">Profile</string>
+    <string name="cambiar_idioma">Change language</string>
+    <string name="cerrar_sesion">Log out</string>
+    <string name="mas_opciones">More options</string>
+
+    <!-- Lugar adapter -->
+    <string name="cierra_a_las">Closes at </string>
+    <string name="abierto">Open</string>
+    <string name="cerrado">Closed</string>
+    <string name="abre_el">Opens at </string>
+    <string name="hora_incio">Hora incio</string>
+    <string name="hora_cierre">Hora cierre</string>
+    <string name="anadir_horario">Anadir horario</string>
+</resources>

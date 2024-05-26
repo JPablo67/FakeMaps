@@ -19,10 +19,13 @@
         <menu>
             <item
                 android:id="@+id/menu_cambiar_idioma"
-                android:title="@string/cambiar_idioma" />
+                android:title="Cambiar Idioma"
+                 />
             <item
                 android:id="@+id/menu_cerrar_sesion"
                 android:title="@string/cerrar_sesion" />
+
+
         </menu>
     </item>
 

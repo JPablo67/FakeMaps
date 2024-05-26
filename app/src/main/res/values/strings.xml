@@ -43,4 +43,15 @@
     <string name="cerrar_sesion">Cerrar sesión</string>
     <string name="mas_opciones">Más opciones</string>
 
+
+    // Lugar adater
+    <string name="cierra_a_las">Cierra a las </string>
+    <string name="abierto">Abierto</string>
+    <string name="cerrado">Cerrado</string>
+    <string name="abre_el">Abre el </string>
+    <string name="hora_incio">Hora incio</string>
+    <string name="hora_cierre">Hora cierre</string>
+    <string name="anadir_horario">Anadir horario</string>
+
+
 </resources>
