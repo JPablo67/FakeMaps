@@ -3,18 +3,31 @@ package co.edu.eam.fakemaps.modelo
 import java.util.Calendar
 import java.util.Date
 
-class Lugar(
-    var id: Int,
-    var nombre: String,
-    var descripcion: String,
-    var direccion: String,
-    var idCreador: Int,
-    var estado: EstadoLugar,
-    var idCategoria: Int,
-    var posicion: Posicion,
-    var idCiudad: Int
-) {
+class Lugar() {
 
+    constructor( id: Int, nombre: String, descripcion: String, direccion: String, idCreador: Int, estado: EstadoLugar, idCategoria: Int, posicion: Posicion, idCiudad: Int):this(){
+        this.id = id
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.direccion = direccion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.idCategoria = idCategoria
+        this.posicion = posicion
+        this.idCiudad = idCiudad
+    }
+
+
+    var id: Int = 0
+    var key: String = ""
+    var nombre: String = ""
+    var descripcion: String = ""
+    var direccion: String = ""
+    var idCreador: Int = 0
+    var estado: EstadoLugar = EstadoLugar.SIN_REVISAR
+    var idCategoria: Int = 0
+    var posicion: Posicion = Posicion()
+    var idCiudad: Int = 0
     var imagenes: ArrayList<String> = ArrayList()
     var telefonos: ArrayList<String> = ArrayList()
     var fecha: Date = Date()

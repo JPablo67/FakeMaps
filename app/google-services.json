@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "488606461918",
+    "project_id": "fakemaps-a1db3",
+    "storage_bucket": "fakemaps-a1db3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488606461918:android:61fb595422c33435b0774f",
+        "android_client_info": {
+          "package_name": "co.edu.eam.fakemaps"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4hVK7ez02BywOe3l4-jHrcPO0d2h_Kgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

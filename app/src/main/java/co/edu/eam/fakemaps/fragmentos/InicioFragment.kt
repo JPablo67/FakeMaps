@@ -14,6 +14,7 @@ import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.Lugares
 import co.edu.eam.fakemaps.databinding.FragmentInicioBinding
 import co.edu.eam.fakemaps.databinding.FragmentSearchBarBinding
+import co.edu.eam.fakemaps.modelo.Lugar
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -21,6 +22,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class InicioFragment : Fragment() ,OnMapReadyCallback{
@@ -65,10 +68,23 @@ class InicioFragment : Fragment() ,OnMapReadyCallback{
             e.printStackTrace()
         }
 
+        Firebase.firestore.collection("lugares").get().addOnSuccessListener {
+            for (document in it) {
+                var lugar = document.toObject(Lugar::class.java)
+                lugar.key = document.id
+
+                gMap.addMarker(MarkerOptions().position(LatLng(lugar.posicion.lat,lugar.posicion.lng))
+                    .title(lugar.nombre))!!.tag = lugar.key
+            }
+        }
+
         Lugares.listarAprobados().forEach {
             val latlng = LatLng(it.posicion.lat,it.posicion.lng)
             gMap.addMarker(MarkerOptions().position(latlng).title(it.nombre).title(it.nombre).visible(true))
+
         }
+
+
         obtenerUbicacion()
 
     }

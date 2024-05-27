@@ -93,7 +93,7 @@ class HorarioDialogoFragment : DialogFragment() {
 
     }
 
-    interface onHorarioCreadoListener{ 
+    interface onHorarioCreadoListener{
         fun elegirHorario(horario:Horario)
     }
 

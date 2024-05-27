@@ -19,6 +19,8 @@ import co.edu.eam.fakemaps.bd.Lugares
 import co.edu.eam.fakemaps.databinding.ActivityDetalleLugarBinding
 import co.edu.eam.fakemaps.modelo.Comentario
 import co.edu.eam.fakemaps.modelo.Lugar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class DetalleLugarActivity : AppCompatActivity() {
 
@@ -80,6 +82,7 @@ class DetalleLugarActivity : AppCompatActivity() {
 
                 if (idUsuario != null) {
                     lugar.comentarios.add(Comentario(textoComentario, idUsuario, estrellas)) // 5 es una calificación de ejemplo
+
                     Toast.makeText(this, "Comentario enviado", Toast.LENGTH_SHORT).show()
                     binding.editTextComentario.text.clear()
 

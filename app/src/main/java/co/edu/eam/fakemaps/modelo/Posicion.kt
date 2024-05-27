@@ -2,6 +2,7 @@ package co.edu.eam.fakemaps.modelo
 
 class Posicion (){
 
+
     var lat:Double = 0.0
     var lng:Double = 0.0
 

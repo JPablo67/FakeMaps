@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("com.google.gms.google-services")
 }
 
 object Libs {
@@ -62,11 +63,13 @@ dependencies {
     implementation(libs.firebase.perf.ktx)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.activity)
-
+    implementation("com.google.firebase:firebase-firestore-ktx:24.3.0")
     testImplementation("junit:junit:${Libs.junit_version}")
     androidTestImplementation("androidx.test.ext:junit:${Libs.androidx_junit_version}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Libs.espresso_core_version}")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation("com.google.android.gms:play-services-location:21.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }

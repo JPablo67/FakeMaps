@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -34,6 +36,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 
 class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorarioCreadoListener, OnMapReadyCallback {
 
@@ -48,6 +55,7 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
     private val defaultLocation = LatLng(4.550923, -75.6557201)
     private var posicion:Posicion? = null
 
+
     private fun obtenerIdUsuarioActual(): Int {
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
 
@@ -58,6 +66,8 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        FirebaseApp.initializeApp(this)
 
         binding = ActivityCrearLugarBinding.inflate(layoutInflater)
 
@@ -157,7 +167,20 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
                 nuevoLugar.telefonos = telefonos
                 nuevoLugar.horarios = horarios
                 Lugares.crear(nuevoLugar)
-                Log.e("LUGAR CREADO", nuevoLugar.toString())
+
+                Firebase.firestore
+                    .collection("lugares").add( nuevoLugar!! )
+                    .addOnSuccessListener {
+                        Snackbar.make(binding.root, getString(R.string.abre_el), Snackbar.LENGTH_LONG).show()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            finish()
+                        }, 4000)
+                    }
+                    .addOnFailureListener{
+                        Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+                    }
+
                 Log.e("CrearLugarActivity",Lugares.listar().toString())
             }else{
                 Log.e("CrearLugarActivity","hola")
