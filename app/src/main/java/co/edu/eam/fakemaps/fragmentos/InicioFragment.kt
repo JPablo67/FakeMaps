@@ -1,6 +1,7 @@
 package co.edu.eam.fakemaps.fragmentos
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Binder
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.fakemaps.R
+import co.edu.eam.fakemaps.activities.DetalleLugarActivity
 import co.edu.eam.fakemaps.bd.Lugares
 import co.edu.eam.fakemaps.databinding.FragmentInicioBinding
 import co.edu.eam.fakemaps.databinding.FragmentSearchBarBinding
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -144,6 +147,12 @@ class InicioFragment : Fragment() ,OnMapReadyCallback{
                 // Permission denied, show a message to the user or handle accordingly
             }
         }
+    }
+
+    fun onInfoWindowClick(p0: Marker) {
+        val intent = Intent(requireContext(), DetalleLugarActivity::class.java)
+        intent.putExtra("codigo", p0.tag.toString())
+        requireContext().startActivity(intent)
     }
 
 }

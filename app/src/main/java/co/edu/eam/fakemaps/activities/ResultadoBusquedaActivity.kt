@@ -18,6 +18,7 @@ class ResultadoBusquedaActivity : AppCompatActivity() {
     lateinit var binding: ActivityResultadoBusquedaBinding
     var textoBusqueda: String = ""
     lateinit var listaLugares: ArrayList<Lugar>
+    lateinit var lugarAdapter: LugarAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +32,20 @@ class ResultadoBusquedaActivity : AppCompatActivity() {
             insets
         }
 
-        textoBusqueda = intent.extras!!.getString("texto", "")
+        textoBusqueda = intent.extras!!.getString("texto", "") ?: ""
         listaLugares = ArrayList()
 
-        if (textoBusqueda.isNotEmpty()) {
-            listaLugares = Lugares.buscarByNombre(textoBusqueda).filter {
-                it.estado != EstadoLugar.RECHAZADO && it.estado != EstadoLugar.SIN_REVISAR
-            } as ArrayList<Lugar>
-            Log.e("ResultadoBusquedaActivity", listaLugares.toString())
-        }
-
-        val adapter = LugarAdapter(listaLugares)
-        binding.listarLugaresBusqueda.adapter = adapter
+        lugarAdapter = LugarAdapter(listaLugares)
+        binding.listarLugaresBusqueda.adapter = lugarAdapter
         binding.listarLugaresBusqueda.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        if (textoBusqueda.isNotEmpty()) {
+            Lugares.buscarPorNombre(textoBusqueda) { lugares ->
+                listaLugares.clear()
+                listaLugares.addAll(lugares)
+                lugarAdapter.notifyDataSetChanged()
+                Log.e("ResultadoBusquedaActivity", listaLugares.toString())
+            }
+        }
     }
 }

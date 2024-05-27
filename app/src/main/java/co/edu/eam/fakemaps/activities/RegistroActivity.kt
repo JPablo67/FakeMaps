@@ -2,6 +2,8 @@ package co.edu.eam.fakemaps.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,9 @@ import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.Usuarios
 import co.edu.eam.fakemaps.databinding.ActivityRegistroBinding
 import co.edu.eam.fakemaps.modelo.Usuario
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -77,7 +82,15 @@ class RegistroActivity : AppCompatActivity() {
 
         // Crear una instancia de Usuario usando el ID convertido a Int
         val usuario = Usuario(idInt, nombre, email, pass, ciudad, false)
-        Usuarios.agregar(usuario)
+        Firebase.firestore.collection("usuarios").add(usuario).addOnSuccessListener {
+            Snackbar.make(binding.root, getString(R.string.abre_el), Snackbar.LENGTH_LONG).show()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                finish()
+            }, 4000)
+        }.addOnFailureListener{
+            Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+        }
 
         Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
         Log.e("Registro Activity", Usuarios.listar().toString())

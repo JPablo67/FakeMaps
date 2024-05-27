@@ -3,6 +3,7 @@ package co.edu.eam.fakemaps.activities
 import ComentarioAdapter
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -57,44 +58,56 @@ class DetalleLugarActivity : AppCompatActivity() {
     }
 
     private fun llenarCampos() {
-        val lugar = Lugares.buscarById(idLugar)
-        binding.nombreLugar.text = lugar!!.nombre
-        binding.descripcionLugar.text = lugar.descripcion
-        binding.direccionLugar.text = lugar.direccion
-        binding.creadorLugar.text = lugar.id.toString()
-        binding.categoriaLugar.text = lugar.idCategoria.toString()
-
-        // Configurar los comentarios
-        val comentarios = lugar.comentarios
-        val comentarioAdapter = ComentarioAdapter(comentarios)
-        binding.recyclerViewComentarios.layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewComentarios.adapter = comentarioAdapter
-
-        // Agregar comentario
-        binding.btnEnviarComentario.setOnClickListener {
-            val textoComentario = binding.editTextComentario.text.toString()
-
-            if (textoComentario.isNotEmpty()) {
-
-                val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-                val id = sp.getInt("id_user",0)
-                val idUsuario = id
-
-                if (idUsuario != null) {
-                    lugar.comentarios.add(Comentario(textoComentario, idUsuario, estrellas)) // 5 es una calificación de ejemplo
-
-                    Toast.makeText(this, "Comentario enviado", Toast.LENGTH_SHORT).show()
-                    binding.editTextComentario.text.clear()
-
-                    // Actualizar la lista de comentarios
-                    comentarioAdapter.actualizarComentarios(comentarios)
-                } else {
-                    Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "El comentario no puede estar vacío", Toast.LENGTH_SHORT).show()
+        //val lugar = Lugares.buscarById(idLugar)
+        Firebase.firestore.collection("Lugares").document(idLugar.toString()).get().addOnSuccessListener {
+            var lugarF = it.toObject(Lugar::class.java)
+            if (lugarF != null) {
+                lugarF.key = it.id
             }
+            Log.e("Detalle lugar", lugarF.toString())
+        }.addOnFailureListener {
+            Log.e("Detalle lugar", it.message.toString())
         }
+
+//        binding.nombreLugar.text = lugar!!.nombre
+//        binding.descripcionLugar.text = lugar.descripcion
+//        binding.direccionLugar.text = lugar.direccion
+//        binding.creadorLugar.text = lugar.id.toString()
+//        binding.categoriaLugar.text = lugar.idCategoria.toString()
+//
+//        // Configurar los comentarios
+//        val comentarios = lugar.comentarios
+//        val comentarioAdapter = ComentarioAdapter(comentarios)
+//        binding.recyclerViewComentarios.layoutManager = LinearLayoutManager(this)
+//        binding.recyclerViewComentarios.adapter = comentarioAdapter
+//
+//        // Agregar comentario
+//        binding.btnEnviarComentario.setOnClickListener {
+//            val textoComentario = binding.editTextComentario.text.toString()
+//
+//            if (textoComentario.isNotEmpty()) {
+//
+//                val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+//                val id = sp.getInt("id_user",0)
+//                val idUsuario = id
+//
+//                if (idUsuario != null) {
+//                    lugar.comentarios.add(Comentario(textoComentario, idUsuario, estrellas)) // 5 es una calificación de ejemplo
+//
+//
+//
+//                    Toast.makeText(this, "Comentario enviado", Toast.LENGTH_SHORT).show()
+//                    binding.editTextComentario.text.clear()
+//
+//                    // Actualizar la lista de comentarios
+//                    comentarioAdapter.actualizarComentarios(comentarios)
+//                } else {
+//                    Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
+//                }
+//            } else {
+//                Toast.makeText(this, "El comentario no puede estar vacío", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
     private fun presionarEstrella(pos:Int){

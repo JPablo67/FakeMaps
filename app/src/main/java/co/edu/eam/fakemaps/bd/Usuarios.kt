@@ -1,6 +1,8 @@
 package co.edu.eam.fakemaps.bd
 
 import co.edu.eam.fakemaps.modelo.Usuario
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 object Usuarios {
 
@@ -12,6 +14,7 @@ object Usuarios {
         usuarios.add(Usuario(1, "Alejandro",  "alejandro@gmail.com","123", "Calarcá",false))
         usuarios.add(Usuario(2, "Mariana",  "mariana@gmail.com","123","Armenia", false))
         usuarios.add(Usuario(3, "Sebas",   "sebas@gmail.com","123","Montnoir", true))
+
         lastUserId = usuarios.maxByOrNull { it.id }?.id ?: 0
     }
 

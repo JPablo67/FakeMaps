@@ -81,6 +81,8 @@ class LoginActivity : AppCompatActivity() {
             binding.passLayout.error = null
         }
 
+
+
         val usuario = Usuarios.login(correo, contrasena)
 
         if (usuario != null) {

@@ -1,10 +1,13 @@
 package co.edu.eam.fakemaps.bd
 
+import android.util.Log
 import co.edu.eam.fakemaps.modelo.Comentario
 import co.edu.eam.fakemaps.modelo.EstadoLugar
 import co.edu.eam.fakemaps.modelo.Horario
 import co.edu.eam.fakemaps.modelo.Lugar
 import co.edu.eam.fakemaps.modelo.Posicion
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 object Lugares {
 
@@ -115,6 +118,50 @@ object Lugares {
     fun buscarPorUsuario(userId: Int): List<Lugar> {
         return lista.filter { it.idCreador == userId }
     }
+
+    fun buscarPorNombre(nombre: String, callback: (ArrayList<Lugar>) -> Unit) {
+        val lugares = ArrayList<Lugar>()
+        Firebase.firestore.collection("lugares")
+            .whereEqualTo("estado", EstadoLugar.ACEPTADO)
+            .get()
+            .addOnSuccessListener { result ->
+                for (doc in result) {
+                    val lugar = doc.toObject(Lugar::class.java)
+                    if (lugar.nombre.lowercase().contains(nombre.lowercase())) {
+                        lugar.key = doc.id
+                        lugares.add(lugar)
+                    }
+                }
+                callback(lugares) // Call the callback with the fetched data
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Lugares", "Error al obtener los lugares", exception)
+                callback(lugares) // Return an empty list on failure
+            }
+    }
+
+    fun buscarPorIdCreador(idCreador: Int, callback: (ArrayList<Lugar>) -> Unit) {
+        val lugares = ArrayList<Lugar>()
+        Firebase.firestore.collection("lugares")
+            .whereEqualTo("estado", EstadoLugar.ACEPTADO)
+            .whereEqualTo("idCreador", idCreador)
+            .get()
+            .addOnSuccessListener { result ->
+                for (doc in result) {
+                    val lugar = doc.toObject(Lugar::class.java)
+                    lugar.key = doc.id
+                    lugares.add(lugar)
+                }
+                callback(lugares) // Call the callback with the fetched data
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Lugares", "Error al obtener los lugares", exception)
+                callback(lugares) // Return an empty list on failure
+            }
+    }
+
+
+
 
 
 }
