@@ -160,6 +160,27 @@ object Lugares {
             }
     }
 
+    fun obtener(key: Int, callback: (Lugar?) -> Unit) {
+        Firebase.firestore
+            .collection("lugares")
+            .document()
+            .get()
+            .addOnSuccessListener {
+                var lugarF = it.toObject(Lugar::class.java)
+                if (lugarF != null) {
+                    lugarF.key = it.id
+                    callback(lugarF) // Llama al callback con el lugar
+                } else {
+                    callback(null) // Llama al callback con null si no se encontró el lugar
+                }
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_obtener", "${it.message}")
+                callback(null) // Llama al callback con null si ocurrió un error
+            }
+    }
+
+
 
 
 
