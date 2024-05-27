@@ -51,4 +51,10 @@
     <string name="hora_incio">Hora incio</string>
     <string name="hora_cierre">Hora cierre</string>
     <string name="anadir_horario">Anadir horario</string>
+
+
+    <string name="paso_3">Paso 3/3: Elegir ubicación</string>
+    <string name="paso_1">Paso 1/3: Información básica</string>
+    <string name="paso_2">Paso 2/3: Selección de horarios</string>
+    <string name="horarios_del_lugar">Horarios del lugar</string>
 </resources>

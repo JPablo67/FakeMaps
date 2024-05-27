@@ -200,16 +200,18 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
 
         gMap.uiSettings.isZoomControlsEnabled = true
         gMap.setOnMapClickListener {
-            if(posicion!=null){
+            if (posicion == null) {
                 posicion = Posicion()
             }
-
-            posicion!!.lat = it.latitude
-            posicion!!.lng = it.longitude
+            posicion?.let { pos ->
+                pos.lat = it.latitude
+                pos.lng = it.longitude
+            }
             gMap.clear()
             gMap.addMarker(MarkerOptions().position(it).title("Aqui esta el lugar"))
         }
     }
+
 
     private fun obtenerUbicacion() {
         try {

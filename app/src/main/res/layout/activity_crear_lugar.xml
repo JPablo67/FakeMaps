@@ -55,9 +55,9 @@
 
         <fragment
             android:id="@+id/mapa_crear_lugar"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+            android:layout_height="500dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/direccionLugar_layout"
