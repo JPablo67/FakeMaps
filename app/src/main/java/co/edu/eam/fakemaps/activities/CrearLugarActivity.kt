@@ -1,6 +1,8 @@
 package co.edu.eam.fakemaps.activities
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,14 +11,13 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.DialogFragment
 import co.edu.eam.fakemaps.R
 import co.edu.eam.fakemaps.bd.Categorias
 import co.edu.eam.fakemaps.bd.Ciudades
-import co.edu.eam.fakemaps.bd.Horarios
-import co.edu.eam.fakemaps.bd.LocalStorage
 import co.edu.eam.fakemaps.bd.Lugares
 import co.edu.eam.fakemaps.databinding.ActivityCrearLugarBinding
 import co.edu.eam.fakemaps.fragmentos.HorarioDialogoFragment
@@ -26,8 +27,15 @@ import co.edu.eam.fakemaps.modelo.EstadoLugar
 import co.edu.eam.fakemaps.modelo.Horario
 import co.edu.eam.fakemaps.modelo.Lugar
 import co.edu.eam.fakemaps.modelo.Posicion
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorarioCreadoListener{
+class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorarioCreadoListener, OnMapReadyCallback {
 
     lateinit var binding: ActivityCrearLugarBinding
     var posCiudad:Int = -1
@@ -35,6 +43,11 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
     lateinit var horarios:ArrayList<Horario>
+    lateinit var gMap:GoogleMap
+    private var tienePermiso = false
+    private val defaultLocation = LatLng(4.550923, -75.6557201)
+    private var posicion:Posicion? = null
+
     private fun obtenerIdUsuarioActual(): Int {
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
 
@@ -67,6 +80,11 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
 
         binding.asignarHorario.setOnClickListener { mostrarDialogo() }
         binding.btnCrearLugar.setOnClickListener{crearLugar()}
+
+        val mapFragment = supportFragmentManager.findFragmentById( R.id.mapa_crear_lugar) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        getLocationPermission()
     }
 
     fun cargarCiudades(){
@@ -129,16 +147,22 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
         }
 
         if (nombre.isNotEmpty() && direccion.isNotEmpty() && horarios.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && ciudad!=-1&&categoria!=-1){
-            val nuevoLugar = Lugar(1,nombre,descripcion,direccion,obtenerIdUsuarioActual(), EstadoLugar.SIN_REVISAR, categoria,
-                Posicion(8f,8f),ciudad)
 
-            val telefonos:ArrayList<String> = ArrayList()
-            telefonos.add(telefono)
-            nuevoLugar.telefonos = telefonos
-            nuevoLugar.horarios = horarios
-            Lugares.crear(nuevoLugar)
-            Log.e("LUGAR CREADO", nuevoLugar.toString())
-            Log.e("CrearLugarActivity",Lugares.listar().toString())
+            if(posicion!=null){
+                val nuevoLugar = Lugar(1,nombre,descripcion,direccion,obtenerIdUsuarioActual(), EstadoLugar.SIN_REVISAR, categoria,
+                    posicion!!,ciudad)
+
+                val telefonos:ArrayList<String> = ArrayList()
+                telefonos.add(telefono)
+                nuevoLugar.telefonos = telefonos
+                nuevoLugar.horarios = horarios
+                Lugares.crear(nuevoLugar)
+                Log.e("LUGAR CREADO", nuevoLugar.toString())
+                Log.e("CrearLugarActivity",Lugares.listar().toString())
+            }else{
+                Log.e("CrearLugarActivity","hola")
+            }
+
 
         }else{
 
@@ -156,5 +180,89 @@ class CrearLugarActivity : AppCompatActivity() , HorarioDialogoFragment.onHorari
 
     override fun elegirHorario(horario: Horario) {
         horarios.add(horario)
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        gMap = p0
+
+        try {
+            if (tienePermiso) {
+                gMap.isMyLocationEnabled = true
+                gMap.uiSettings.isMyLocationButtonEnabled = true
+            } else {
+                gMap.isMyLocationEnabled = false
+                gMap.uiSettings.isMyLocationButtonEnabled = false
+            }
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        }
+        obtenerUbicacion()
+
+        gMap.uiSettings.isZoomControlsEnabled = true
+        gMap.setOnMapClickListener {
+            if(posicion!=null){
+                posicion = Posicion()
+            }
+
+            posicion!!.lat = it.latitude
+            posicion!!.lng = it.longitude
+            gMap.clear()
+            gMap.addMarker(MarkerOptions().position(it).title("Aqui esta el lugar"))
+        }
+    }
+
+    private fun obtenerUbicacion() {
+        try {
+            if (tienePermiso) {
+                val ubicacionActual =
+                    LocationServices.getFusedLocationProviderClient(this).lastLocation
+                ubicacionActual.addOnCompleteListener(this) {
+                    if (it.isSuccessful) {
+                        val ubicacion = it.result
+                        if (ubicacion != null) {
+                            val latlng = LatLng(ubicacion.latitude, ubicacion.longitude)
+                            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15F)
+                            )
+                        }
+                    } else {
+                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation,
+                            14F))
+                        gMap.uiSettings.isMyLocationButtonEnabled = false
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            Log.e("Exception: %s", e.message, e)
+        }
+    }
+
+    private fun getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            tienePermiso = true
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                tienePermiso = true
+                // Refresh the map
+                val mapFragment = supportFragmentManager.findFragmentById(R.id.mapa_principal) as SupportMapFragment
+                mapFragment.getMapAsync(this)
+            } else {
+                tienePermiso = false
+                // Permission denied, show a message to the user or handle accordingly
+            }
+        }
     }
 }

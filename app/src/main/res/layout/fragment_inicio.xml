@@ -6,9 +6,11 @@
     android:background="@color/cast_seekbar_secondary_progress_color"
     tools:context=".fragmentos.InicioFragment">
 
-    <View
+    <fragment
+        android:id="@+id/mapa_principal"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CCFFCC"/>
+        />
 
 </FrameLayout>
